@@ -6,6 +6,13 @@ from torchvision import datasets, transforms, models
 DATASET_ROOTS = {"imagenet_val": "YOUR_PATH/ImageNet_val/",
                 "broden": "data/broden1_224/images/"}
 
+root_directory = os.path.abspath('C:/Users/kier0/Desktop/UCSD/CLIP-dissect/')
+DATASET_ROOT = {
+    "imagenet_val": os.path.join(root_directory, "ImageNet_val/"),
+    "broden": os.path.join(root_directory, 'data', 'broden1_224', 'broden1_224', 'images')
+}
+
+
 
 def get_target_model(target_name, device):
     """
@@ -54,14 +61,15 @@ def get_data(dataset_name, preprocess=None):
     elif dataset_name == "cifar100_val":
         data = datasets.CIFAR100(root=os.path.expanduser("~/.cache"), download=True, train=False, 
                                    transform=preprocess)
+    elif dataset_name == "broden":
+        data = torch.utils.data.ConcatDataset(datasets.ImageFolder(DATASET_ROOT["broden"], preprocess))
         
-    elif dataset_name in DATASET_ROOTS.keys():
-        data = datasets.ImageFolder(DATASET_ROOTS[dataset_name], preprocess)
+    # elif dataset_name in DATASET_ROOTS.keys():
+    #     data = datasets.ImageFolder(DATASET_ROOTS[dataset_name], preprocess)
                
     elif dataset_name == "imagenet_broden":
         data = torch.utils.data.ConcatDataset([datasets.ImageFolder(DATASET_ROOTS["imagenet_val"], preprocess), 
                                                      datasets.ImageFolder(DATASET_ROOTS["broden"], preprocess)])
-        
     return data
 
 
