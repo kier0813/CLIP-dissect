@@ -10,3 +10,8 @@
 We do not provide download instructions for ImageNet data, to evaluate using your own copy of ImageNet validation set you must set 
 the correct path in `DATASET_ROOTS["imagenet_val"]` variable in `data_utils.py`.
 
+## How to reproduce my code (Joon) 
+
+1. Open up expanding_CLIOP-Dissect_JoonCha.ipynb
+2. Follow the installation process written above
+3. Run until "Building Pipeline" section to reproduce 4 layers of neuron images
